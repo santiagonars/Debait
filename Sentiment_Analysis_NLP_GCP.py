@@ -15,12 +15,11 @@
 
 import io
 import os
-#import json
-#import pandas as pd
+import json
+from json import JSONDecodeError
 
 
-# ----------Imports the Google Cloud client library----------
-# Cloud Vision Library
+# ----------Imports the Google Cloud NLP API----------
 # from google.cloud import vision
 # Natural Lanaguage Processing Libraries (NLP)
 from google.cloud import language
@@ -41,47 +40,47 @@ def apiAccess():
     # print(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
 
 
-# ------------NATURAL LANGUAGE API EXAMPLE-----------
-def nlpSentimentExample():
+# ------------NATURAL LANGUAGE API Call-----------
+def nlpSentimentCall():
     # Instantiates a client
     client = language.LanguageServiceClient()
 
-    # The text to analyze
+    # Argument 1: The text to analyze
     text = u'Hello, world!'
     document = types.Document(
         content=text,
         type=enums.Document.Type.PLAIN_TEXT)
+    # Argument 2:(OPTIONAL FOR NOW) Encoding type -> Available values: NONE, UTF8, UTF16, UTF32
+    #encoding_type = enums.EncodingType.UTF8
 
     # Detects the sentiment of the text
-    sentiment = client.analyze_sentiment(document=document).document_sentiment
-
+    response = client.analyze_sentiment(document=document).document_sentiment
     print('Text: {}'.format(text))
-    print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+    # print('Sentiment: {}, {}'.format(response.score, response.magnitude))
+    # print(response.score)
+    # print(response.magnitude)
+    convertToJSON(response.score, response.magnitude)
+    
 
+def convertToJSON(scoreResponse, magnitudeResponse):
+    # define Python object
+    pythonData = {
+        "score": scoreResponse,
+        "magnitude": magnitudeResponse
+    }
+    # print(pythonData)
+    try:  
+        # ->OPTION 1: serialize to json as a string
+        jsonStr = json.dumps(pythonData, indent=4)
+        print(jsonStr)
+        # ->OPTION 2: serialize to json to separate file (filename="nlpSentimentResponse.json")
+        json.dump(pythonData, open("nlpSentimentResponse.json","w"))
+    except JSONDecodeError as err:
+        print("Whoops, json encoder error:")
+        print(err.msg)
+        print(err.lineno, err.colno)
 
 
 if __name__ == '__main__':
     apiAccess()
-    nlpSentimentExample()
-
-
-
-# ------------CLOUD VISION API EXAMPLE-----------
-
-""" URLlink = "https://www.epiloglaser.com/resources/sample-club/images/baby-blocks/baby-blocks-thumb.jpg"
-
-client = vision.ImageAnnotatorClient() # Instantiate a client to use the vision method 
-image = vision.types.Image()
-image.source.image_uri = URLlink
-
-# Perform label detection on the image file
-response = client.label_detection(image=image)
-labels = response.label_annotations
-
-for label in labels:
-    labelList = []
-    labelList = label.description
-    print(labelList) """
-
-
-
+    nlpSentimentCall()

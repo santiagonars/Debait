@@ -18,7 +18,6 @@ import os
 import json
 from json import JSONDecodeError
 
-
 # ----------Imports the Google Cloud NLP API----------
 # from google.cloud import vision
 # Natural Lanaguage Processing Libraries (NLP)

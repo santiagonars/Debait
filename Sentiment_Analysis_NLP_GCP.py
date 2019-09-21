@@ -45,7 +45,7 @@ def nlpSentimentCall():
     client = language.LanguageServiceClient()
 
     # Argument 1: The text to analyze
-    text = u'Hello, world!'
+    text = "The investigation into Donald Trump’s promise to a foreign leader, which shocked a member of the intelligence community into making a complaint, relates to Ukraine, according to numerous media outlets.The New York Times and ABC both confirmed the involvement of Ukraine, first reported by the Washington Post on Thursday night.The complaint was made two weeks after Trump spoke to newly-elected Ukrainian President Volodymyr Zelensky, a former comedian, in late July, where the leaders discussed improving U.S.-Ukraine relations by boosting investigations into corruption."
     document = types.Document(
         content=text,
         type=enums.Document.Type.PLAIN_TEXT)

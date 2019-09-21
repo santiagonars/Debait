@@ -28,38 +28,41 @@ from google.cloud.language import enums
 from google.cloud.language import types
 
 
-# ---------Load API Key to Access Google Cloud Platform----------
-#***IMPORTANT: make sure JSON file for service account key name is correct & that it's inside the authPath directory
-#serviceKey = "CloudVision-sandbox-366681a0e85d.json"  # Cloud Vision key
-#print("Service Key= " + serviceKey)
-serviceKey = "debias-253616-2ce80c5caea0.json" # NLP key
-with open(serviceKey, 'r') as myfile:
-    json_authCred=myfile.read()
-    # print(json_authCred)
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceKey
-# print(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
+def apiAccess():
+    # ---------Load API Key to Access Google Cloud Platform----------
+    #***IMPORTANT: make sure JSON file for service account key name is correct & that it's inside the authPath directory
+    #serviceKey = "CloudVision-sandbox-366681a0e85d.json"  # Cloud Vision key
+    #print("Service Key= " + serviceKey)
+    serviceKey = "debias-253616-2ce80c5caea0.json" # NLP key
+    with open(serviceKey, 'r') as myfile:
+        json_authCred=myfile.read()
+        # print(json_authCred)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceKey
+    # print(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
 
 
 # ------------NATURAL LANGUAGE API EXAMPLE-----------
+def nlpSentimentExample():
+    # Instantiates a client
+    client = language.LanguageServiceClient()
 
-# Instantiates a client
-client = language.LanguageServiceClient()
+    # The text to analyze
+    text = u'Hello, world!'
+    document = types.Document(
+        content=text,
+        type=enums.Document.Type.PLAIN_TEXT)
 
-# The text to analyze
-text = u'Hello, world!'
-document = types.Document(
-    content=text,
-    type=enums.Document.Type.PLAIN_TEXT)
+    # Detects the sentiment of the text
+    sentiment = client.analyze_sentiment(document=document).document_sentiment
 
-# Detects the sentiment of the text
-sentiment = client.analyze_sentiment(document=document).document_sentiment
-
-print('Text: {}'.format(text))
-print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
-
-
+    print('Text: {}'.format(text))
+    print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
 
 
+
+if __name__ == '__main__':
+    apiAccess()
+    nlpSentimentExample()
 
 
 

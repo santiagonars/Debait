@@ -1,17 +1,15 @@
 # --------------------STEPS:------------------------------
-# Activate Google Cloud Platform account
-# pip3 install --upgrade google-cloud-language
-# Enable NLP API:
+# ---->>> NLP Configuration Setup:
+# STEP 1: Activate Google Cloud Platform account
+# STEP 2: pip3 install --upgrade google-cloud-language
+# STEP 3:Enable NLP API:
 #    -> https://console.cloud.google.com/apis/library/language.googleapis.com?q=natural&id=223648f2-2e7c-4acd-b0ca-782f9021a541&project=ardent-oven-253616
-#
-#
+# STEP 4: Create API key  and store locally to access NLP API
 # --------------------NOTES:------------------------------
 # NOTE: 
 
-
 # --------------------BUGS:------------------------------
 # BUG: 
-
 
 import io
 import os

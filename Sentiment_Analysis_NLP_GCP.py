@@ -38,8 +38,29 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceKey
 #print(os.environ["GOOGLE_APPLICATION_CREDENTIALS"])
 
 
+# ------------NATURAL LANGUAGE API EXAMPLE-----------
 
-# ---------CLOUD VISION API EXAMPLE---------
+# Instantiates a client
+client = language.LanguageServiceClient()
+
+# The text to analyze
+text = u'Hello, world!'
+document = types.Document(
+    content=text,
+    type=enums.Document.Type.PLAIN_TEXT)
+
+# Detects the sentiment of the text
+sentiment = client.analyze_sentiment(document=document).document_sentiment
+
+print('Text: {}'.format(text))
+print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+
+
+
+
+
+
+# ------------CLOUD VISION API EXAMPLE-----------
 
 URLlink = "https://www.epiloglaser.com/resources/sample-club/images/baby-blocks/baby-blocks-thumb.jpg"
 

@@ -1,2 +1,2 @@
-# DeBait
+# Debait
 ShellHacks 2019

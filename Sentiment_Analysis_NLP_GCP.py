@@ -52,10 +52,10 @@ def nlpSentimentCall():
 
     # Detects the sentiment of the text
     response = client.analyze_sentiment(document=document).document_sentiment
-    print('Text: {}'.format(text))
-    # print('Sentiment: {}, {}'.format(response.score, response.magnitude))
+    # print('Text: {}'.format(text))
     # print(response.score)
     # print(response.magnitude)
+
     convertToJSON(response.score, response.magnitude)
     
 
@@ -65,12 +65,12 @@ def convertToJSON(scoreResponse, magnitudeResponse):
         "score": scoreResponse,
         "magnitude": magnitudeResponse
     }
-    # print(pythonData)
+    # Exception Handler to encode to json
     try:  
         # ->OPTION 1: serialize to json as a string
         jsonStr = json.dumps(pythonData, indent=4)
         print(jsonStr)
-        # ->OPTION 2: serialize to json to separate file (filename="nlpSentimentResponse.json")
+        # ->OPTION 2: serialize to json to separate file
         json.dump(pythonData, open("nlpSentimentResponse.json","w"))
     except JSONDecodeError as err:
         print("Whoops, json encoder error:")

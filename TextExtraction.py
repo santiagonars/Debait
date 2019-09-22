@@ -3,7 +3,6 @@
 # STEP 1: pip3 install request
 # STEP 2: pip3 install beautifulsoup4
 # STEP 3:
-# STEP 4: 
 # --------------------NOTES:------------------------------
 # NOTE: 
 
@@ -36,96 +35,17 @@ def httpRequest():
 
 def webScrapeURL(result):
     html_code = result.content
-    # print(html_code)
-    print("-------------------------------------------------STAAAAAAART-------------------------------------------")
+    # 
     soup = BeautifulSoup(html_code, 'html.parser')
 
     stringToModify = ""
     for p_tag in soup.find_all('p'): # Same but for paragraph tags
             textFound = p_tag.text
             stringToModify += textFound
-
     print(stringToModify)
-
-
-        
-    
-
-def webScrapingExample():
-    pass
-    # Block of code for grabbing tags method START -------------------------------
-    # Run beautiful soup on the code to make it more readable
-    if lastID == orgID:
-        lastID = orgID
-        completeString = ''
-        try:
-            soup = BeautifulSoup(html_code, 'html.parser') #Parse html code
-        except Exception as e:
-            print(e)
-        
-        for li_tag in soup.find_all('li'): # Locate all of the list tags
-            textFound = li_tag.text.strip() # Strip the spaces off the front and back of the tag's data
-            
-            if textFound: # If we find text we will call the method confAndWrite
-                for replacers in replaceChars: # We will replace everything in the replacechars array with nothing.
-                    textFound = textFound.lower().replace(replacers.lower(), '')
-                
-                if textFound:
-                    confAndWrite()
-                    completeString += textFound
-                    completeString += ' '
-                    writeJSON()
-    
-        for p_tag in soup.find_all('p'): # Same but for paragraph tags
-            textFound = p_tag.text.strip()
-
-            
-            if textFound:
-                for replacers in replaceChars: # We will replace everything in the replacechars array with nothing.
-                    textFound = textFound.lower().replace(replacers.lower(), '')
-            
-                if textFound:
-                    confAndWrite()
-                    completeString += textFound
-                    completeString += ' '
-                    writeJSON()
-    else:
-        try:
-            soup = BeautifulSoup(html_code, 'html.parser') #Parse html code
-        except Exception as e:
-            print(e)
-        
-        for li_tag in soup.find_all('li'): # Locate all of the list tags
-            textFound = li_tag.text.strip() # Strip the spaces off the front and back of the tag's data
-
-            
-            if textFound: # If we find text we will call the method confAndWrite
-                for replacers in replaceChars: # We will replace everything in the replacechars array with nothing.
-                    textFound = textFound.lower().replace(replacers.lower(), '')
-            
-                if textFound:
-                    confAndWrite()
-                    completeString += textFound
-                    completeString += ' '
-                    writeJSON()
-    
-        for p_tag in soup.find_all('p'): # Same but for paragraph tags
-            textFound = p_tag.text.strip()
-
-            if textFound:
-                for replacers in replaceChars: # We will replace everything in the replacechars array with nothing.
-                    textFound = textFound.lower().replace(replacers.lower(), '')
-            
-                if textFound:
-                    confAndWrite()
-                    completeString += textFound
-                    completeString += ' '
-                    writeJSON()
-    
-
 
 
 if __name__ == '__main__':
     httpRequest()
- #   webScrapingExample()
+
 

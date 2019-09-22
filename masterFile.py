@@ -16,6 +16,7 @@ from json import JSONDecodeError
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
+# ---------------------Time Delay-----------------------------
 
 # app = Flask(__name__)
 # api = Api(app)
@@ -153,6 +154,7 @@ def convertToJSON(evaluation, scoreResponse, magnitudeResponse):
 if __name__ == '__main__':
     # api.add_resource(Data, "/processing")
     # app.run(debug=True)
-    
+    time.sleep(5)
+    print('oi')
     apiAccess()
     # httpRequest()
